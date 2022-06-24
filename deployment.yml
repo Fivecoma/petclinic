@@ -16,22 +16,9 @@ spec:
          containers:
            - name: petclinic-erp
              image: "tquatrep/petclinic:1.0.0"
+             ports:
+             - containerPort: 80
   replicas: 1
   selector:
     matchLabels:
       type: front-end
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: nodejs-service
-spec:
-  selector:
-    app: nodejsapp
-  type: LoadBalancer  
-  ports:
-    - protocol: TCP
-      targetPort: 3000
-      port: 80
-      nodePort: 30000
