@@ -18,7 +18,7 @@ pipeline {
         }
         stage('Build Docker Image') {
             steps {
-                sh "docker build -t tquatrep/petclinic:1.0.0 /var/lib/jenkins/workspace/${JOB_NAME}"
+                sh "docker build --no-cache -t tquatrep/petclinic:1.0.0 /var/lib/jenkins/workspace/${JOB_NAME}"
             }
         }
         stage('Upload to DockerHub') {
