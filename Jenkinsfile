@@ -33,7 +33,9 @@ pipeline {
         
         stage('Deploy app container') {
             steps {
-                sh "ssh vagrant@192.168.60.30 docker rm -f petclinic"
+                sh "ssh vagrant@192.168.60.30 docker stop petclinic"
+                sh "ssh vagrant@192.168.60.30 docker container prune -f"
+                sh "ssh vagrant@192.168.60.30 docker rmi tquatrep/petclinic:1.0.0"
                 sh "ssh vagrant@192.168.60.30 docker run -d -p 80:8080 --name petclinic tquatrep/petclinic:1.0.0"
             }
         }
