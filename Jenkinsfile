@@ -43,8 +43,8 @@ pipeline {
         stage('Deploy to K8s') {
             steps {
                 sh 'scp deployment.yml vagrant@192.168.60.60:/home/vagrant'
-                sh 'ssh vagrant@192.168.60.60 cp /etc/kubernetes/admin.conf $HOME/'
-                sh 'ssh vagrant@192.168.60.60 chown $(id -u):$(id -g) $HOME/admin.conf'
+                sh 'ssh vagrant@192.168.60.60 sudo cp /etc/kubernetes/admin.conf $HOME/'
+                sh 'ssh vagrant@192.168.60.60 sudo chown $(id -u):$(id -g) $HOME/admin.conf'
                 sh 'ssh vagrant@192.168.60.60 export KUBECONFIG=$HOME/admin.conf'
                 sh 'ssh vagrant@192.168.60.60 kubectl apply -f /home/vagrant/deployment.yml'
                 sh 'ssh vagrant@192.168.60.60 kubectl delete svc my-service'
