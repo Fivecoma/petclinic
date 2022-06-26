@@ -46,7 +46,7 @@ pipeline {
                 sh 'ssh vagrant@192.168.60.60 sudo cp /etc/kubernetes/admin.conf /home/vagrant/'
                 sh 'ssh vagrant@192.168.60.60 sudo chown $(id -u):$(id -g) /home/vagrant/admin.conf'
                 sh 'ssh vagrant@192.168.60.60 export KUBECONFIG=/home/vagrant/admin.conf'
-                sh 'ssh vagrant@192.168.60.60 kubectl apply -f /home/vagrant/deployment.yml'
+                sh 'ssh vagrant@192.168.60.60 sudo kubectl apply -f /home/vagrant/deployment.yml'
                 sh 'ssh vagrant@192.168.60.60 kubectl delete svc my-service'
                 sh 'ssh vagrant@192.168.60.60 kubectl expose deployment petclinic-deployment --type=NodePort --port=8080 --name=my-service'
             }
